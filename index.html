@@ -48,7 +48,7 @@
             var request = gapi.client.people.people.connections.list({
 			    'resourceName': 'people/me',
 			    'pageSize': 100,
-			    'requestMask.includeField': 'person.phone_numbers,person.email_addresses,person.names'
+			    'requestMask.includeField': 'person.phone_numbers,person.organizations,person.email_addresses,person.names'
             });
 
             request.execute(function(resp) {
@@ -56,8 +56,8 @@
 
                 if (connections.length > 0)
                 {
-                    var _Html = "<table><tr><th>Name</th><th>Email</th><th>Phone</th></tr>";
-                    var _EmptyCell = "<td> - </td>";
+                    var _Html = "<table><tr><th>Name</th><th>Email</th><th>Company</th><th>Phone</th></tr>";
+          	    var _EmptyCell = "<td> - </td>";
 
                     for (i = 0; i < connections.length; i++)
                     {
@@ -73,7 +73,10 @@
 					        _Html += "<td>" + person.emailAddresses[0].value + "</td>";
                         else
                             _Html += _EmptyCell;
-
+            if (person.organizations && person.organizations.length > 0)
+            _Html += "<td>" + person.organizations[0].name + "</td>";
+            else
+            _Html += _EmptyCell;
 				        if (person.phoneNumbers && person.phoneNumbers.length > 0)
 					        _Html += "<td>" + person.phoneNumbers[0].value + "</td>";
 				        else
