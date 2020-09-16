@@ -48,7 +48,7 @@
             var request = gapi.client.people.people.connections.list({
 			    'resourceName': 'people/me',
 			    'pageSize': 100,
-			    'requestMask.includeField': 'person.phone_numbers,person.organizations,person.email_addresses,person.names'
+			    'requestMask.includeField': 'person.phone_numbers,person.email_addresses,person.names'
             });
 
             request.execute(function(resp) {
@@ -56,7 +56,7 @@
 
                 if (connections.length > 0)
                 {
-                    var _Html = "<table><tr><th>Name</th><th>Email</th><th>Company</th><th>Phone</th></tr>";
+                    var _Html = "<table><tr><th>Name</th><th>Email</th><th>Phone</th></tr>";
                     var _EmptyCell = "<td> - </td>";
 
                     for (i = 0; i < connections.length; i++)
